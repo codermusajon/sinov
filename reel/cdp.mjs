@@ -4,7 +4,7 @@ const CHROME = [process.env.CHROME, 'C:/Program Files/Google/Chrome/Application/
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/opt/pw-browsers/chromium', '/usr/bin/google-chrome', '/usr/bin/chromium'].filter(Boolean).find(p => fs.existsSync(p));
 // Windows/macOS: haqiqiy GPU. Linux bulut konteyneri (GPU yo'q): SwiftShader, faqat REEL_CPU=1 bilan ruxsat etiladi.
 const ANGLE = process.platform === 'win32' ? 'd3d11' : process.platform === 'darwin' ? 'metal' : (process.env.REEL_CPU ? 'swiftshader' : 'gl');
-export async function launch({ width = 1080, height = 1920, port = 9450 } = {}) {
+export async function launch({ width = 1080, height = 1920, port = 9400 + (process.pid % 500) } = {}) {
   try { os.setPriority(os.constants.priority.PRIORITY_LOW); } catch {}
   const udd = fs.mkdtempSync(path.join(process.env.TMPDIR || os.tmpdir(), 'reel-'));
   const proc = spawn(CHROME, [`--remote-debugging-port=${port}`, `--user-data-dir=${udd}`, '--headless=new', '--no-first-run', '--disable-extensions',

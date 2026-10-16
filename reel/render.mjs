@@ -1,15 +1,15 @@
 // node render.mjs stills 0.2,2.0,...      -> stills/t<vaqt>.png
 // node render.mjs full [from] [to]         -> frames/f0000.jpg ... (davom ettiriladigan, bo'laklab)
-import http from 'node:http'; import fs from 'node:fs'; import path from 'node:path'; import os from 'node:os';
+import http from 'node:http'; import fs from 'node:fs'; import path from 'node:path'; import os from 'node:os'; import { fileURLToPath } from 'node:url';
 import { launch } from './cdp.mjs';
 import { FPS, TOTAL } from './timeline.mjs';
 try { os.setPriority(os.constants.priority.PRIORITY_LOW); } catch {}
 
-const ROOT = path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
+const ROOT = path.dirname(fileURLToPath(import.meta.url));   // Windows'da ham to'g'ri (C:\...)
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json' };
 const server = http.createServer((req, res) => {
   const f = path.join(ROOT, decodeURIComponent(req.url.split('?')[0]));
-  if (!f.startsWith(ROOT) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); return res.end(); }
+  if (path.relative(ROOT, f).startsWith('..') || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); return res.end(); }
   res.writeHead(200, { 'content-type': TYPES[path.extname(f)] || 'application/octet-stream', 'cache-control': 'no-store' });
   fs.createReadStream(f).pipe(res);
 });

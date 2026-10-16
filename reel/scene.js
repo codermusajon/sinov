@@ -431,7 +431,7 @@ function placeCamera(t) {
 // ---------- subtitr ----------
 const subEl = document.getElementById('sub');
 function subtitle(t) {
-  const s = film.subs.find((x) => t >= x.t0 && t < x.t1);
+  const s = Q.has('nosub') ? null : film.subs.find((x) => t >= x.t0 && t < x.t1);
   if (!s) { subEl.style.opacity = 0; return; }
   if (subEl.textContent !== s.text) subEl.textContent = s.text;
   subEl.className = s.who;

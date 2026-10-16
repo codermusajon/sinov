@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; padding: 0; background: #000; overflow: hidden; width: 1080px; height: 1920px; }
+  canvas { display: block; }
+  #subwrap { position: fixed; left: 0; top: 600px; width: 1080px; height: 224px; display: flex; align-items: center; justify-content: center; pointer-events: none;
+    background: radial-gradient(ellipse 60% 55% at 50% 50%, rgba(0,0,0,.28), rgba(0,0,0,0) 70%); }
+  #sub { max-width: 880px; text-align: center; font: 600 54px/1.22 "Segoe UI", "Liberation Sans", system-ui, sans-serif; color: #f6f4f0; text-wrap: balance;
+    text-shadow: 0 2px 20px rgba(0,0,0,.72), 0 1px 4px rgba(0,0,0,.6); opacity: 0; }
+  #sub.C { color: #ffd8c2; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div id="subwrap"><div id="sub"></div></div>
+<script type="module" src="/scene.js"></script>
+</body>
+</html>

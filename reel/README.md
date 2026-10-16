@@ -18,8 +18,7 @@ Ovozlar: ElevenLabs `eleven_v4` — talaba: **Sardor**, Claude: **Jahongir**.
 ## O'z kompyuteringizda (RTX 4060) qayta render qilish
 1. Node.js 22+, Google Chrome va ffmpeg o'rnatilgan bo'lsin.
 2. `cd reel && npm i` (three.js o'rnatiladi).
-3. `vo/*.mp3` fayllari git'da yo'q — ularni ElevenLabs flow'dan yuklab oling yoki Claude'dan qayta yaratishni so'rang, so'ng
-   `ffmpeg -i vo/x.mp3 -ar 44100 -ac 1 vo/x.wav`.
+3. Ovoz fayllari (`vo/*.wav`) repoda bor, qo'shimcha ish kerak emas.
 4. `node make.mjs render` — Windows'da Chrome avtomatik ravishda GPU (ANGLE d3d11) bilan ishlaydi.
    Render ~830 kadr, RTX 4060'da bir necha daqiqa.
 
